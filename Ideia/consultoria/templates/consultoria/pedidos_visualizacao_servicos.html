@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Pedidos Pagos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #555;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #f4f4f9;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .welcome-msg {
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Histórico de Pedidos Pagos</h1>
+    <p class="welcome-msg">Bem-vindo, <strong>{{ username }}</strong>!</p>
+</header>
+
+<div class="navbar">
+    <a href="/">Início</a>
+    <a href="/area_consultor">Área Consultor</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Categoria Requisitada</th>
+            <th>Data do Pedido</th>
+            <th>Preço</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.email }}</td>
+                <td>{{ pedido.especialidade }}</td>
+                <td>{{ pedido.data_pedido|date:"d-m-Y H:i:s" }}</td>
+                <td>€{{ pedido.preco }}</td>
+                <td>{{ pedido.status }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">Nenhum pedido pago encontrado.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="footer">
+    <p>&copy; 2025 Todos os direitos reservados.</p>
+</div>
+
+</body>
+</html>

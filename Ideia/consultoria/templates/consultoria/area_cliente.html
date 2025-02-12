@@ -1,0 +1,63 @@
+{% extends 'consultoria/welcome.html' %}
+
+{% block content %}
+    <h1>Bem-vindo à Área Cliente!</h1>
+    <p>Aqui você pode fazer um novo pedido ou visualizar os seus pedidos feitos.</p>
+
+    <!-- Área de botões no canto superior esquerdo -->
+    <div class="top-left-buttons">
+        <a href="{% url 'criar_pedido' %}" class="button">Fazer Pedido de Serviço</a>
+        <a href="{% url 'meus_servicos_pedidos' %}" class="button">Visualizar Meus Pedidos de Serviços</a>
+    </div>
+{% endblock %}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 50px;
+        font-size: 2.5em;
+    }
+
+    p {
+        text-align: center;
+        color: #555;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+
+    /* Área de botões */
+    .top-left-buttons {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        font-size: 1.1em;
+    }
+
+    .button {
+        background-color: #007BFF;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>

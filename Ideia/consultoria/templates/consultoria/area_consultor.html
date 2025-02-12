@@ -1,0 +1,91 @@
+{% extends 'consultoria/welcome.html' %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Consultor</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Estilos para o botão de logout no canto superior direito */
+        .logout-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .button-logout {
+            background-color: #f44336; /* Vermelho */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button-logout:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Estilos para os botões principais na área do consultor */
+        .buttons-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .area-consultor {
+            position: relative;
+            padding: 30px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    {% block content %}
+    <div class="area-consultor">
+        <div class="logout-container">
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="button-logout">🚪 Logout</button>
+            </form>
+        </div>
+
+        <h1>Área de Consultoria</h1>
+
+        <!-- Botões para escolher categoria e visualizar pedidos de serviço -->
+        <div class="buttons-container">
+            <a href="{% url 'escolher_categoria' %}">
+                <button class="button">Pedido de visualização de serviços</button>
+            </a>
+            <a href="{% url 'pedidos_visualizacao_servicos' %}">
+                <button class="button">Histórico de pedidos</button>
+            </a>
+        </div>
+    </div>
+    {% endblock %}
+
+</body>
+</html>

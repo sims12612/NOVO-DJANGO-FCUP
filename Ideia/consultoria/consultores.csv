@@ -1,0 +1,25 @@
+nome,especialidade,preco_hora,disponibilidade,categoria
+João,TI,50,Segunda a Sexta,IT
+Maria,Marketing,70,Segunda a Quinta,Ciências Sociais
+Carlos,Finanças,60,Segunda a Sexta,Ciências Exatas
+Ana,Direito,80,Segunda a Sexta,Ciências Sociais
+Pedro,Recursos Humanos,65,Segunda a Sexta,Ciências Sociais
+Luana,Psicologia,75,Segunda a Sexta,Ciências Sociais
+Rui,Engenharia,90,Segunda a Quinta,Ciências Exatas
+Isabel,Design Gráfico,50,Segunda a Sexta,Outros
+Tiago,Desenvolvimento Web,85,Segunda a Sexta,IT
+Catarina,Educação,60,Segunda a Quinta,Ciências Sociais
+Roberto,Arquitetura,100,Segunda a Sexta,Ciências Exatas
+Ricardo,Comércio Exterior,70,Segunda a Sexta,Ciências Exatas
+Sofia,Vendas,60,Segunda a Quinta,Ciências Sociais
+Miguel,Logística,80,Segunda a Sexta,Ciências Exatas
+Joana,Tradução,55,Segunda a Sexta,Outros
+Mariana,Contabilidade,95,Segunda a Sexta,Ciências Exatas
+Felipe,Tecnologia da Informação,70,Segunda a Quinta,IT
+Fabiana,Finanças Pessoais,60,Segunda a Sexta,Ciências Exatas
+Laura,Negócios Internacionais,80,Segunda a Quinta,Ciências Sociais
+Bruno,Marketing Digital,85,Segunda a Sexta,Ciências Sociais
+Carlos,Investimentos,90,Segunda a Sexta,Ciências Exatas
+Beatriz,Psicopedagogia,75,Segunda a Quinta,Ciências Sociais
+
+Miguel Simoes,Django,30,Segunda a sexta,IT
