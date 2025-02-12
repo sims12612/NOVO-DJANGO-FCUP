@@ -370,6 +370,24 @@ def criar_pedido(request):
     return render(request, 'consultoria/criar_pedido.html', {'form': form})
 
 def pedidoregistadocomsucesso(request, nome,categoria,especialidade,telemovel, morada, descricao):
+    subject = f"Pedido registrado com sucesso: {nome}"
+    message = f"""
+           ✅ Sucesso!
+
+            O seu pedido de serviço foi registado com sucesso!
+
+           Categoria: {categoria}
+           Especialidade: {especialidade}
+           telemovel: {telemovel}
+           Morada: {morada}
+           Descrição: {descricao}
+
+           Agradecemos o seu pedido!
+           """
+    from_email = settings.DEFAULT_FROM_EMAIL  # Certifique-se de que esta variável está configurada no seu settings.py
+    recipient_list = [request.user.email]  # Envia para o email do usuário logado
+
+    send_mail(subject, message, from_email, recipient_list)
 
 
 
@@ -657,6 +675,13 @@ def pagar_pedido(request, preco, num_pedidos, categoria):
             salvar_pedido_csv(pedido_id, email,categoria, data_pedido, preco)
             # Carregar os últimos pedidos após simular pagamento
             pedidos = ultimos_pedidos(request, categoria)
+             # Enviar e-mail de confirmação de pagamento
+            subject = 'Pagamento Confirmado!'
+            message = f'O pagamento do seu pedido foi processado com sucesso. Detalhes: \n\nPreço: {preco} \nData do Pedido: {data_pedido}\nCategoria: {categoria}' #PODIA MOSTRAR OS PEDIDOS E OS DETALHES
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [email]
+
+            send_mail(subject, message, from_email, recipient_list)
 
 
             # Redireciona para a página de pedidos após pagamento bem-sucedido
