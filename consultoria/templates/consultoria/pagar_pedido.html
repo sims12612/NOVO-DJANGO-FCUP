@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirme Seu Pagamento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background: url("https://c0.wallpaperflare.com/preview/582/1016/26/fashion-men-business-mens-fashion.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .navbar a {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+        .form-container p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .form-container .btn {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        .login-area {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .login-area span {
+            color: white;
+            margin-right: 10px;
+        }
+        .login-area button {
+            font-size: 16px;
+            color: white;
+            background-color: #dc3545;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .login-area button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="navbar">
+        <a href="{% url 'welcome' %}">🏠 Início</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'area_consultor' %}">📊 Área do Consultor</a>
+        {% endif %}
+    </div>
+
+    <div class="form-container">
+        <h2>Confirme Seu Pagamento</h2>
+        <p>Você escolheu pagar <strong>€{{ preco }}</strong> por <strong>{{ num_pedidos }}</strong> pedidos na categoria <strong>{{ categoria }}</strong>.</p>
+
+        <form method="post">
+            {% csrf_token %}
+             <input type="hidden" name="timestamp" id="timestamp">
+
+            {% if num_pedidos == 3 %}
+                <a href="https://www.paypal.com/ncp/payment/JZ5C6D4H3RSJY" class="btn btn-success">Pagar Agora (3 Pedidos - 10€)</a>
+            {% elif num_pedidos == 5 %}
+                <a href="https://www.paypal.com/ncp/payment/JLXX9MERVY5JC" class="btn btn-success">Pagar Agora (5 Pedidos - 15€)</a>
+            {% elif num_pedidos == 10 %}
+                <a href="https://www.paypal.com/ncp/payment/F3DT9PRR99NGS" class="btn btn-success">Pagar Agora (10 Pedidos - 25€)</a>
+            {% endif %}
+
+            <!-- Botão Simulado -->
+            <button type="submit" class="btn btn-warning" onclick="saveTimestamp()">Simular Pagamento</button>
+        </form>
+        <script>
+        function saveTimestamp() {
+            document.getElementById("timestamp").value = new Date().toISOString();
+        }
+        </script>
+
+        {% if user.is_authenticated %}
+            <div class="login-area">
+                <span>{{ user.username }}</span>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">🚪 Logout</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

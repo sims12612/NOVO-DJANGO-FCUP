@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            background: url("https://c0.wallpaperflare.com/preview/582/1016/26/fashion-men-business-mens-fashion.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .navbar a {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+        .login-area {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .login-area input {
+            padding: 5px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        .login-area button {
+            font-size: 16px;
+            color: white;
+            background-color: #dc3545;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .login-area button:hover {
+            background-color: #c82333;
+        }
+        .top-buttons {
+            position: absolute;
+            top: 80px; /* Ajustado para não sobrepor a navbar */
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .button {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 60%;
+        }
+        .area {
+            display: none; /* Esconde as áreas por padrão */
+        }
+        .area.active {
+            display: block; /* Exibe a área ativa */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="navbar">
+        <a href="{% url 'welcome' %}">🏠 Início</a>
+    </div>
+
+    <!-- Exibe os botões principais para cliente e consultor -->
+    <div class="top-buttons">
+        <a href="javascript:void(0);" onclick="toggleArea('cliente')" class="button">Área Cliente</a>
+        <a href="javascript:void(0);" onclick="toggleArea('consultor')" class="button">Área Consultor</a>
+    </div>
+
+    <!-- Áreas de Cliente e Consultor -->
+    <div class="content">
+        <div id="cliente" class="area">
+            <h2>Área Cliente</h2>
+            <p>Aqui você pode registrar novos pedidos de serviço e visualizar os que já fez.</p>
+            <a href="{% url 'criar_pedido' %}" class="button">Registar Pedido de Serviço</a>
+            <a href="{% url 'meus_servicos_pedidos' %}" class="button">Ver meus pedidos</a>
+        </div>
+
+        <div id="consultor" class="area">
+            <h2>Área Consultor</h2>
+            <p>Aqui você pode ver os pedidos de visualização de serviços e também os pedidos que você fez.</p>
+            <a href="{% url 'escolher_categoria' %}" class="button">Pedidos de Visualização de Serviços</a>
+            <a href="{% url 'pedidos_visualizacao_servicos' %}" class="button">Ver meus pedidos</a>
+        </div>
+    </div>
+
+    <!-- Sessão Iniciada -->
+    {% if user.is_authenticated %}
+        <div class="login-area">
+            <p>Sessão Iniciada: {{ user.username }}</p>
+            <a href="{% url 'logout' %}" class="button">🚪 Logout</a>
+        </div>
+    {% endif %}
+
+    <script>
+        // Função para alternar entre as áreas de Cliente e Consultor
+        function toggleArea(area) {
+            // Esconde todas as áreas
+            const areas = document.querySelectorAll('.area');
+            areas.forEach(function (el) {
+                el.classList.remove('active');
+            });
+
+            // Exibe a área selecionada
+            const selectedArea = document.getElementById(area);
+            selectedArea.classList.add('active');
+        }
+    </script>
+</body>
+</html>

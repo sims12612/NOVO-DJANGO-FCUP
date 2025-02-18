@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Pedidos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #444;
+      padding: 10px;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .navbar a:hover {
+      background-color: #555;
+    }
+    table {
+      width: 100%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: white;
+    }
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background-color: #f4f4f9;
+    }
+    .btn-concluido {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-concluido:hover {
+      background-color: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+    .welcome-msg {
+      font-size: 1.2em;
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .actions button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .actions button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Histórico de Pedidos</h1>
+    <p class="welcome-msg">Bem-vindo, <strong>{{ usuario.nome }}</strong>!</p>
+  </header>
+
+  <div class="navbar">
+    <a href="/">Início</a>
+    <a href="/area_cliente">Área Cliente</a>
+    <a href="/logout">Logout</a>
+  </div>
+
+  <h3>Últimos {{ num_pedidos }} Pedidos </h3>
+
+  <table id="pedidosTable">
+    <thead>
+      <tr>
+        <th>Especialidade</th>
+        <th>Status</th>
+        <th>Data do Pedido</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% csrf_token %}
+      {% for pedido in pedidos %}
+        <tr>
+          <td>{{ pedido.especialidade }}</td>
+          <td>{{ pedido.status }}</td>
+          <td>{{ pedido.data_pedido|date:'d/m/Y H:i' }}</td>  <!-- Exibe a data formatada -->
+          <td>
+            <button class="btn-concluido"
+                    data-pessoa-id="{{ pessoa.id }}">
+              Marcar como Concluído
+            </button>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button onclick="window.location.href='/'">Início</button>
+    <button onclick="window.location.href='/area_cliente'">Voltar para a Área Cliente</button>
+    <button onclick="window.location.href='/logout'">Logout</button>
+  </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('.btn-concluido').forEach(button => {
+    button.addEventListener('click', function() {
+      console.log("Botão clicado!");  // Depuração
+
+      const pessoa_id = this.getAttribute('data-pessoa-id');  // Agora capturando o ID da pessoa
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      console.log('ID da Pessoa:', pessoa_id);
+
+      fetch('/marcar_concluido/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({
+          pessoa_id: pessoa_id  // Passando o ID da pessoa
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Resposta do servidor:', data);
+        if (data.success) {
+          alert('Pedido marcado como concluído!');
+          location.reload();
+        } else {
+          alert(`Erro: ${data.error}`);
+        }
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      });
+    });
+  });
+});
+</script>

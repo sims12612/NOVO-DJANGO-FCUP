@@ -1,0 +1,56 @@
+primeiro_nome,ultimo_nome,categoria,especialidade,email,telemovel,Morada,Online,Descricao,data_pedido,status
+João,Silva,Ciências Exatas,Engenheiro Civil,joao.silva@email.com,912345678,Rua das Flores, 12,,,
+Carlos,Almeida,Ciências Exatas,Engenheiro Civil,carlos.almeida@email.com,914567890,Rua do Sol, 7,,,
+Rui,Silva,Ciências Exatas,Engenheiro de Redes,rui.silva@email.com,926789012,Avenida João XXI, 15,,,
+Ana,Sousa,Ciências Sociais,Designer Gráfico,ana.sousa@email.com,915678901,Rua dos Lírios, 25,,,
+Tiago,Mendes,Ciências Sociais,Educador Físico,tiago.mendes@email.com,924567890,Praça da República, 10,,,
+Cláudia,Martins,Ciências Sociais,Nutricionista,claudia.martins@email.com,921234567,Rua do Príncipe Real, 3,,,
+João,Pereira,Ciências Sociais,Contabilista,joao.pereira@email.com,922345678,Avenida de Roma, 21,,,
+Carla,Rocha,Ciências Sociais,Enfermeira,carla.rocha@email.com,923456789,Rua dos Mártires, 5,,,
+Fátima,Ribeiro,Ciências Sociais,Educadora Social,fatima.ribeiro@email.com,936789012,Rua das Oliveiras, 18,,,
+Miguel,Ribeiro,IT,Programador,miguel.ribeiro@email.com,920123456,Rua das Amoreiras, 1,,,
+Fernando,Costa,IT,Programador de Software,fernando.costa@email.com,929012345,Avenida Magalhães Lima, 30,,,
+Marco,Ribeiro,IT,Consultor de TI,marco.ribeiro@email.com,931234567,Rua das Pedras, 14,,,
+Beatriz,Costa,Ciências Exatas,Advogada,beatriz.costa@email.com,925678901,Rua da Constituição, 2,,,
+Ricardo,Pinto,Ciências Sociais,Arquiteto,ricardo.pinto@email.com,918901234,Rua da Paz, 33,,,
+Sofia,Santos,Ciências Sociais,Fisioterapeuta,sofia.santos@email.com,919012345,Rua da Alegria, 44,,,
+Laura,Oliveira,Ciências Sociais,Psicóloga,laura.oliveira@email.com,917890123,Rua Nova, 19,,,
+Liliana,Ferreira,Ciências Sociais,Jornalista,liliana.ferreira@email.com,927890123,Rua do Cardal, 6,,,
+Daniela,Almeida,Ciências Sociais,Consultora Financeira,daniela.almeida@email.com,928901234,Rua da Vitória, 8,,,
+Isabel,Rocha,Ciências Sociais,Gestora de Projetos,isabel.rocha@email.com,930123456,Rua S. João, 22,,,
+Susana,Martins,Ciências Sociais,Personal Trainer,susana.martins@email.com,932345678,Rua do Oriente, 11,,,
+Luís,Pereira,Ciências Sociais,Economista,luis.pereira@email.com,933456789,Rua das Nogueiras, 13,,,
+Patrícia,Costa,Ciências Sociais,Fotógrafa,patricia.costa@email.com,934567890,Avenida da República, 25,,,
+Joaquim,Almeida,Ciências Sociais,Consultor Jurídico,joaquim.almeida@email.com,935678901,Rua da Igreja, 20,,,
+Miguel,S,IT,asddddddddddddddddddd,miguelns126@gmail.com,asddddddd,Aveiro,SIM,da,2025-02-10 06:59:29
+Miguel,S,IT,asddddddddddddddddddd,miguelns126@gmail.com,asddddddd,Aveiro,SIM,da,2025-02-10 06:59:10
+Miguel,S,IT,asddddddddddddddddddd,miguelns126@gmail.com,asddddddd,Aveiro,SIM,da,2025-02-10 06:59:00
+Miguel,S,IT,",,,,,,,,",miguelns126@gmail.com,mmmmmmmmmm,Aveiro,SIM,s,2025-02-10 07:51:33
+Miguel,S,Ciências Sociais,Advogado,miguelns126@gmail.com,91111,Aveiro,SIM,AJUDA DIREITO CIVIL,2025-02-10 09:14:18
+Miguel,S,IT,asddddddddddddddddddd,miguelns126@gmail.com,ssssss,Aveiro,,ssssss,2025-02-10 22:05:39
+Miguel,S,Ciências Sociais,Canalizado,miguelns126@gmail.com,917778062,Porto,NÃO,mmmmmmmmmmmm,2025-02-10 22:07:22
+Miguel,S,IT,mmmmmmmmmmmmmmm,miguelns126@gmail.com,mmmmmmmmmm,Aveiro,SIM,sss,2025-02-10 22:26:44
+Miguel,S,IT,mmmmmmmmm,miguelns126@gmail.com,9999999999999,Aveiro,SIM,nnnnnnnnn,2025-02-11 01:41:00
+Miguel,S,IT,a,miguelns126@gmail.com,99999,Aveiro,SIM,s,2025-02-11 03:32:26
+Miguel,S,IT,mmmmmmm,miguelns126@gmail.com,mmmmmmmmmmm,Aveiro,SIM,sssssssssssssss,2025-02-11 03:34:43
+Miguel,S,IT,s,miguelns126@gmail.com,s,Santarém,SIM,s,2025-02-11 12:01:05
+Miguel,S,IT,ss,miguelns126@gmail.com,999999999,Aveiro,SIM,99999999999,2025-02-11 13:54:00
+Miguel,S,Ciências Sociais,Canalizador,miguelns126@gmail.com,9333333333,Aveiro,SIM,s,2025-02-11 14:35:49
+Miguel,S,IT,s,miguelns126@gmail.com,s,Aveiro,SIM,s,2025-02-11 14:37:13
+Miguel,S,IT,ssssssss,miguelns126@gmail.com,ssssssssss,Aveiro,SIM,sss,2025-02-11 14:39:09
+Miguel,S,Ciências Sociais,Bombeiro,miguelns126@gmail.com,933,Aveiro,SIM,ss,2025-02-11 16:02:44
+Miguel,S,IT,Engenheiro Informatico Django,miguelns126@gmail.com,93333,Aveiro,SIM,ss,2025-02-11 16:03:52
+Miguel,S,Ciências Sociais,Canalizador,miguelns126@gmail.com,99999,Aveiro,SIM,asss,2025-02-11 19:15:39
+Miguel,S,IT,mm,miguelns126@gmail.com,mmmm,Aveiro,SIM,ssss,2025-02-11 20:05:10
+Miguel,S,IT,asda,miguelns126@gmail.com,dd,Aveiro,SIM,ss,2025-02-11 21:54:39
+Miguel,S,IT,s,miguelns126@gmail.com,s,Santarém,SIM,s,2025-02-11 21:55:59
+Miguel,S,IT,mmmmmmm,miguelns126@gmail.com,m,Aveiro,SIM,m,2025-02-11 21:57:17
+Miguel,S,IT,s,miguelns126@gmail.com,ss,Santarém,SIM,s,2025-02-11 22:09:30
+Miguel,S,IT,s,miguelns126@gmail.com,ss,Santarém,SIM,s,2025-02-11 22:18:22
+Miguel,S,IT,s,miguelns126@gmail.com,s,Setúbal,SIM,s,2025-02-11 22:28:18
+Miguel,S,IT,s,miguelns126@gmail.com,s,Santarém,SIM,s,2025-02-11 22:33:27
+Miguel,S,IT,s,miguelns126@gmail.com,s,Santarém,SIM,s,2025-02-11 22:53:27
+Miguel,S,IT,mm,miguelns126@gmail.com,mmm,Aveiro,SIM,mm,2025-02-11 23:30:25
+Miguel,Silva,IT,swrilla,miguelsimoes1998@hotmail.com,9999999999,Aveiro,SIM,s,2025-02-18 09:33:49
+Miguel,Silva,IT,trilla,miguelsimoes1998@hotmail.com,ss,Aveiro,SIM,s,2025-02-18 09:44:36
+Miguel,Silva,IT,Django,miguelsimoes1998@hotmail.com,934652951,Aveiro,SIM,s,2025-02-18 09:57:31

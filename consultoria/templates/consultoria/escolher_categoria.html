@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha a Categoria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background: url("https://c0.wallpaperflare.com/preview/582/1016/26/fashion-men-business-mens-fashion.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .navbar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .navbar a {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            font-size: 16px;
+        }
+        .form-container select, .form-container button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+        }
+        .form-container button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        .login-area {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .login-area span {
+            color: white;
+            margin-right: 10px;
+        }
+        .login-area button {
+            font-size: 16px;
+            color: white;
+            background-color: #dc3545;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .login-area button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="navbar">
+        <a href="{% url 'welcome' %}">🏠 Início</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'area_consultor' %}">📊 Area do Consultor</a>
+        {% endif %}
+    </div>
+
+    <div class="form-container">
+        <h2>Escolha a Categoria</h2>
+        <form method="post" action="{% url 'escolher_categoria' %}">
+            {% csrf_token %}
+
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" id="categoria">
+                <option value="IT" {% if categoria == 'IT' %}selected{% endif %}>IT (Tecnologia da Informação)</option>
+                <option value="Ciências Sociais" {% if categoria == 'Ciências Sociais' %}selected{% endif %}>Ciências Sociais</option>
+                <option value="Ciências Exatas" {% if categoria == 'Ciências Exatas' %}selected{% endif %}>Ciências Exatas</option>
+            </select><br>
+
+            <label for="num_pedidos">Número de Pedidos:</label>
+            <select name="num_pedidos" id="num_pedidos">
+                <option value="3" {% if num_pedidos == '3' %}selected{% endif %}>3 Pedidos - 10€</option>
+                <option value="5" {% if num_pedidos == '5' %}selected{% endif %}>5 Pedidos - 15€</option>
+                <option value="10" {% if num_pedidos == '10' %}selected{% endif %}>10 Pedidos - 25€</option>
+            </select><br><br>
+
+            <button type="submit">Ir para Pagamento</button>
+        </form>
+
+        {% if user.is_authenticated %}
+            <div class="login-area">
+                <span>{{ user.username }}</span>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">🚪 Logout</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

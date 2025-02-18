@@ -1,0 +1,26 @@
+{% extends 'consultoria/welcome.html' %}
+
+{% block content %}
+    <div style="text-align: center; margin-top: 50px;">
+        <h1>Você foi deslogado com sucesso!</h1>
+
+        <p style="margin-bottom: 40px;"></p> <!-- Espaço extra entre o título e o botão -->
+
+        <a href="{% url 'welcome' %}" class="button" style="
+            font-size: 24px;
+            color: white;
+            background-color: #FF5733;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+        "
+        onmouseover="this.style.backgroundColor='#FF7043'; this.style.transform='scale(1.1)';"
+        onmouseout="this.style.backgroundColor='#FF5733'; this.style.transform='scale(1)';">
+            Voltar para o Início
+        </a>
+    </div>
+{% endblock %}

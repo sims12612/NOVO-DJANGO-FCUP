@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Pagamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://c0.wallpaperflare.com/preview/582/1016/26/fashion-men-business-mens-fashion.jpg") no-repeat center center fixed; /* Definindo o fundo */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        .payment-confirmation {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .btn-details {
+            margin-top: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-details:hover {
+            background-color: #0056b3;
+        }
+
+        .pedido-details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .no-orders {
+            padding: 10px;
+            background-color: #ffcccb;
+            color: #333;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            color: #333;
+        }
+
+        .logout-btn, .home-btn, .dashboard-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover, .home-btn:hover, .dashboard-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .home-btn {
+            background-color: #4CAF50;
+        }
+
+        .dashboard-btn {
+            background-color: #007bff;
+        }
+
+        .home-btn:hover {
+            background-color: #45a049;
+        }
+
+        .dashboard-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Ícone da casa ao lado do botão "Início" */
+        .home-btn::before {
+            content: "\1F3E0"; /* Código Unicode para o ícone da casa */
+            margin-right: 8px;
+        }
+
+        /* Ajustar o fundo para que fique igual aos outros */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://c0.wallpaperflare.com/preview/582/1016/26/fashion-men-business-mens-fashion.jpg") no-repeat center center fixed; /* Definir o fundo fixo */
+            background-size: cover;
+            z-index: -1;
+        }
+
+        /* Posicionar os botões "Início" e "Dashboard" no canto superior esquerdo */
+        .top-left-buttons {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-left-buttons a {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Fundo -->
+<div class="background"></div>
+
+<!-- Botões Início e Dashboard no canto superior esquerdo -->
+<div class="top-left-buttons">
+    <a href="{% url 'welcome' %}" class="home-btn">Início</a>
+    <a href="{% url 'area_consultor' %}" class="dashboard-btn">Area do Consultor</a>
+</div>
+
+<!-- Nome do usuário, botões de navegação e logout no canto superior direito -->
+{% if user.is_authenticated %}
+    <div class="user-info">
+        <p><strong>{{ user.first_name }}</strong></p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Sair</button>
+        </form>
+    </div>
+{% endif %}
+
+<div class="container">
+    <h2>Pagamento Realizado com Sucesso!</h2>
+
+    <!-- Confirmação do pagamento -->
+    {% if pagamento_realizado %}
+        <p class="payment-confirmation">Pagamento realizado com sucesso!</p>
+    {% endif %}
+
+    <!-- Exibir os últimos pedidos -->
+    <h3>Últimos {{ num_pedidos }} Pedidos na Categoria: {{ categoria }}</h3>
+
+    {% if pedidos %}
+        <ul>
+            {% for pedido in pedidos %}
+                {% if forloop.counter <= num_pedidos %}
+                    <li>
+                        <strong>{{ pedido.usuario.first_name }}</strong>  {{ pedido.data_pedido }} - {{ pedido.preco }}
+
+                        <!-- Botão para exibir/ocultar detalhes -->
+                        <button class="btn-details" onclick="toggleDetails('{{ pedido.id }}')">Ver Detalhes</button>
+
+                        <!-- Detalhes do pedido que serão exibidos ao clicar -->
+                        <div class="pedido-details" id="details-{{ pedido.id }}">
+                            <p><strong>Nome:</strong> {{ pedido.primeiro_nome }} {{ pedido.ultimo_nome }}</p>
+                            <p><strong>Especialidade:</strong> {{ pedido.especialidade }}</p>
+                            <p><strong>Telemóvel:</strong> {{ pedido.telemovel }}</p>
+                            <p><strong>Morada:</strong> {{ pedido.morada }}</p>
+                            <p><strong>Descrição:</strong> {{ pedido.descricao }}</p>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-orders">Não há pedidos na categoria {{ categoria }}.</p>
+    {% endif %}
+</div>
+
+<!-- Script para alternar entre mostrar/ocultar detalhes --><script>
+    function toggleDetails(pedidoId) {
+        var detailsDiv = document.getElementById('details-' + pedidoId);
+
+        // Verifique se a div existe
+        if (detailsDiv) {
+            // Alterna a visibilidade utilizando a classe
+            detailsDiv.classList.toggle('hidden');
+        } else {
+            console.log("Não encontrou os detalhes para o pedido:", pedidoId);
+        }
+    }
+</script>
+
+<!-- Estilo para esconder e exibir os detalhes -->
+<style>
+    .pedido-details.hidden {
+        display: none;
+    }
+
+    .pedido-details {
+        display: block;
+    }
+</style>

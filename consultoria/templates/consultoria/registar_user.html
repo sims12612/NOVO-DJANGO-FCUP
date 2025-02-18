@@ -1,0 +1,232 @@
+<!-- registration/register.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo de Usuário</title>
+    <style>
+        /* Estilo para o fundo da página */
+        body {
+            background-image: url("https://c0.wallpaperflare.com/preview/582/1016/26/fashion-men-business-mens-fashion.jpg");
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Estilo para o botão de "Início" no canto superior esquerdo */
+        .btn-inicio {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-inicio:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilo para a centralização das mensagens de erro */
+        .messages {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            padding: 20px;
+            background-color: rgba(255, 0, 0, 0.8); /* Cor de fundo vermelha com opacidade */
+            color: white;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Estilo do formulário */
+        form {
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para o formulário */
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+        }
+
+        /* Estilo para os campos de input e botão */
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: white;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilo para erros nos campos */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: red;
+        }
+
+        li {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botão "Início" no canto superior esquerdo -->
+<a href="/" class="btn-inicio">Início</a>
+
+<h2> Registo de Usuário</h2>
+
+<!-- Exibe as mensagens de erro global -->
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <!-- Exibe o campo de nome de usuário -->
+    <div>
+        <label for="id_username">Nome de usuário:</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <ul>
+                {% for error in form.username.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Exibe o campo de e-mail -->
+    <div>
+        <label for="id_email">E-mail:</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <ul>
+                {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Exibe o campo de primeiro nome -->
+    <div>
+        <label for="id_first_name">Primeiro nome:</label>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+            <ul>
+                {% for error in form.first_name.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Exibe o campo de sobrenome -->
+    <div>
+        <label for="id_last_name">Último nome:</label>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+            <ul>
+                {% for error in form.last_name.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Exibe o campo de senha -->
+    <div>
+        <label for="id_password1">Senha:</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <ul>
+                {% for error in form.password1.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Exibe o campo de confirmação de senha -->
+    <div>
+        <label for="id_password2">Confirmar Senha:</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <ul>
+                {% for error in form.password2.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Exibe o campo de tipo de usuário -->
+    <div>
+        <label for="id_user_type">Tipo de Usuário:</label>
+        {{ form.user_type }}
+        {% if form.user_type.errors %}
+            <ul>
+                {% for error in form.user_type.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Botão para enviar o formulário -->
+    <div>
+        <button type="submit">Registrar</button>
+    </div>
+
+</form>
+
+</body>
+</html>

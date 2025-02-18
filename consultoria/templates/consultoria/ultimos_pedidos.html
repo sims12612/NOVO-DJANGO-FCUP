@@ -1,0 +1,69 @@
+<h2>Últimos {{ num_pedidos }} Pedidos na Categoria: {{ categoria }}</h2>
+
+{% if pedidos %}
+    <ul>
+       {% for pedido in pedidos|slice:":num_pedidos" %}
+            <li>
+                <strong>{{ pedido.nome_cliente }}</strong> - {{ pedido.data_pedido }} - {{ pedido.preco }}€
+
+                <!-- Botão para exibir/ocultar detalhes -->
+                <button class="btn-details" onclick="toggleDetails('{{ pedido.id }}')">Ver Detalhes</button>
+
+                <!-- Detalhes do pedido que serão exibidos ao clicar -->
+                <div class="pedido-details" id="details-{{ pedido.id }}" style="display: none;">
+                    <p>Especialidade: {{ pedido.especialidade }}</p>
+                    <p>Telemóvel: {{ pedido.telemovel }}</p>
+                    <p>Morada: {{ pedido.morada }}</p>
+                    <p>Descrição: {{ pedido.descricao }}</p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Não há pedidos na categoria {{ categoria }}.</p>
+{% endif %}
+
+<!-- Confirmação do pagamento bem-sucedido -->
+{% if pagamento_realizado %}
+    <p class="payment-confirmation">Pagamento realizado com sucesso!</p>
+{% endif %}
+
+<!-- Estilo para os botões e detalhes -->
+<style>
+    .btn-details {
+        margin-top: 5px;
+        padding: 5px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .pedido-details {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+    }
+
+    .payment-confirmation {
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        margin-top: 15px;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- Script para alternar entre mostrar/ocultar detalhes -->
+<script>
+    function toggleDetails(pedidoId) {
+        var detailsDiv = document.getElementById('details-' + pedidoId);
+        if (detailsDiv.style.display === 'none') {
+            detailsDiv.style.display = 'block';
+        } else {
+            detailsDiv.style.display = 'none';
+        }
+    }
+</script>
